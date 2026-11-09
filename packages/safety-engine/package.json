@@ -1,0 +1,24 @@
+{
+  "name": "@vazhithunai/safety-engine",
+  "version": "1.0.0",
+  "description": "Pure TypeScript 100% deterministic walking-safety co-pilot state machine and corridor engine",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "test": "pnpm build && node run-tests.mjs",
+    "test:perf": "pnpm build && node run-tests.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}

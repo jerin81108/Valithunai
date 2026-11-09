@@ -1,0 +1,28 @@
+{
+  "name": "vazhithunai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "வழித்துணை (Vazhithunai) - 100% offline, on-device walking-safety co-pilot for blind and low-vision people",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:ban-network": "node scripts/ban-network-test.mjs",
+    "test:safety": "pnpm --filter @vazhithunai/safety-engine test",
+    "bench": "pnpm --filter @vazhithunai/bench start",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "@rollup/wasm-node": "^4.68.1",
+    "@types/node": "^26.6.6",
+    "fast-check": "^4.10.2",
+    "turbo": "^2.4.4",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  },
+  "packageManager": "pnpm@9.15.5"
+}
