@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="ta">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
   <meta name="theme-color" content="#0B1B3A" />
-  <meta name="description" content="வழித்துணை (Vazhithunai) – 100% Offline, on-device walking-safety co-pilot for blind and low-vision people." />
+  <meta name="description"
+    content="வழித்துணை (Vazhithunai) – 100% Offline, on-device walking-safety co-pilot for blind and low-vision people." />
   <title>வழித்துணை (Vazhithunai) – Safe Walking Co-Pilot</title>
   <link rel="manifest" href="/manifest.json" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
+
 <body>
   <!-- Kolam State Edge Breathing Ring -->
   <div id="state-ring" class="state-CLEAR" aria-hidden="true"></div>
 
   <!-- Screen Reader Live Announcements -->
-  <div id="sr-announcer" class="sr-only" aria-live="assertive" aria-atomic="true" style="position: absolute; left: -9999px;">
+  <div id="sr-announcer" class="sr-only" aria-live="assertive" aria-atomic="true"
+    style="position: absolute; left: -9999px;">
     வழித்துணை தயாராக உள்ளது. பாதை பாதுகாப்பாக உள்ளது.
   </div>
 
@@ -81,7 +85,8 @@
             <span>"ஏன்?" (Why?)</span>
             <small style="font-size: 13px; font-weight: normal;">காரணத்தை விளக்கு (Key W)</small>
           </button>
-          <button class="btn-action btn-radar" id="btn-radar" aria-label="சுற்றிப் பார் - இடது-வலது ரேடார் ஸ்கேன் (Key R)">
+          <button class="btn-action btn-radar" id="btn-radar"
+            aria-label="சுற்றிப் பார் - இடது-வலது ரேடார் ஸ்கேன் (Key R)">
             <span>"சுற்றிப் பார்"</span>
             <small style="font-size: 13px; font-weight: normal;">3D ரேடார் ஸ்கேன் (Key R)</small>
           </button>
@@ -132,7 +137,8 @@
         </div>
 
         <div style="margin-top: 16px; display: flex; gap: 8px;">
-          <button id="btn-audio-toggle" class="btn-hazard" style="flex: 1; text-align: center; justify-content: center;">
+          <button id="btn-audio-toggle" class="btn-hazard"
+            style="flex: 1; text-align: center; justify-content: center;">
             🔊 ஒலி இயக்கு (Unmute)
           </button>
         </div>
@@ -141,12 +147,13 @@
       <!-- Safety Notice Card -->
       <div class="safety-notice" role="note">
         <strong>⚠️ முதன்மை பாதுகாப்பு அறிவிப்பு:</strong><br />
-        வழித்துணை ஒரு <em>துணை உபகரணம் மட்டுமே</em>. கண்பார்வையற்றோருக்கான வெள்ளைக் கோல் (White Cane) அல்லது வழிகாட்டி நாய்க்கு மாற்றல்ல. எப்போதும் வெள்ளைக் கோலை கையில் வைத்துக்கொண்டே நடக்கவும்.
+        வழித்துணை ஒரு <em>துணை உபகரணம் மட்டுமே</em>. கண்பார்வையற்றோருக்கான வெள்ளைக் கோல் (White Cane) அல்லது வழிகாட்டி
+        நாய்க்கு மாற்றல்ல. எப்போதும் வெள்ளைக் கோலை கையில் வைத்துக்கொண்டே நடக்கவும்.
       </div>
     </aside>
   </main>
 
   <script type="module" src="/app.js"></script>
 </body>
-</html>
 
+</html>
