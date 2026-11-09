@@ -111,3 +111,4 @@ export function normalizeThreatClass(rawClass: string): ThreatClass | null {
 export function isValidThreatClass(rawClass: string): boolean {
   return normalizeThreatClass(rawClass) !== null;
 }
+

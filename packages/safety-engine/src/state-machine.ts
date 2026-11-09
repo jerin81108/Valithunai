@@ -313,12 +313,14 @@ export class SafetyEngine {
       }
     } else {
       // Unpersisted detections (e.g. window 1 or 2 of 3)
+      primaryHazard = processedHazards[0];
+      transitionReason = primaryHazard?.reasons[0] || 'CAUTION_PROXIMITY';
+
       if (this.state === 'RECOVERING') {
         // Any obstacle detected during recovering resets counter and relapses to HAZARD
         nextState = 'HAZARD';
         this.recoveryCount = 0;
         transitionReason = 'INSTANT_RELAPSE_DURING_RECOVERY';
-        primaryHazard = processedHazards[0];
       }
     }
 

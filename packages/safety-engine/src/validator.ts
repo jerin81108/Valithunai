@@ -145,3 +145,4 @@ export function validateSensingWindow(
     sanitizedDetections: sanitizedList
   };
 }
+

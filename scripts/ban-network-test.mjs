@@ -89,3 +89,4 @@ if (violations > 0) {
 }
 
 console.log('✅ Network Ban Test PASSED. Zero network calls or external fetch dependencies detected.');
+

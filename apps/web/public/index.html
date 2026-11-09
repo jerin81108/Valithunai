@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <meta name="theme-color" content="#0B1B3A" />
+  <meta name="description" content="வழித்துணை (Vazhithunai) – 100% Offline, on-device walking-safety co-pilot for blind and low-vision people." />
+  <title>வழித்துணை (Vazhithunai) – Safe Walking Co-Pilot</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Kolam State Edge Breathing Ring -->
+  <div id="state-ring" class="state-CLEAR" aria-hidden="true"></div>
+
+  <!-- Screen Reader Live Announcements -->
+  <div id="sr-announcer" class="sr-only" aria-live="assertive" aria-atomic="true" style="position: absolute; left: -9999px;">
+    வழித்துணை தயாராக உள்ளது. பாதை பாதுகாப்பாக உள்ளது.
+  </div>
+
+  <!-- Top Status Bar -->
+  <header class="status-bar" role="banner">
+    <div class="brand-group">
+      <h1 class="brand-title">வழித்துணை</h1>
+      <span class="brand-tagline">| Vazhithunai – உங்கள் ஒவ்வொரு அடிக்கும் துணை</span>
+    </div>
+    <div class="telemetry-badges">
+      <span class="badge badge-offline" title="Zero outbound network requests">
+        ஆஃப்லைன் ✔
+      </span>
+      <span class="badge badge-fps" id="badge-fps">30 FPS</span>
+      <span class="badge badge-fps" id="badge-latency">&lt; 15 ms</span>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="layout-container" role="main">
+    <!-- Left Column: Live 3D Perspective Guardian & Radar -->
+    <section class="viewport-section" aria-label="நேரடி கண்காணிப்பு பாதை">
+      <div class="viewport-card" id="viewport-card">
+        <!-- 3D Perspective Corridor Canvas -->
+        <canvas id="corridor-canvas" width="800" height="520"></canvas>
+
+        <!-- Top Right: Radar HUD Sonar -->
+        <div class="radar-hud" title="ரேடார் ஸ்கேனர் (Radar Sonar)">
+          <canvas id="radar-canvas" width="110" height="110"></canvas>
+        </div>
+
+        <!-- Top Left: Current State Badge with Kolam Shape -->
+        <div class="hud-state-banner" id="hud-state-banner">
+          <svg class="hud-shape-icon" viewBox="0 0 100 100" id="hud-shape-svg">
+            <circle cx="50" cy="50" r="40" fill="#1FA45B" />
+          </svg>
+          <div>
+            <div class="hud-state-text" id="hud-state-label" style="color: #1FA45B;">தெளிவு (CLEAR)</div>
+            <div style="font-size: 13px; color: #CBD5E1;" id="hud-recovery-info">பாதை பாதுகாப்பாக உள்ளது</div>
+          </div>
+        </div>
+
+        <!-- Bottom: Time-to-Collision (TTC) Bar -->
+        <div class="ttc-container">
+          <span class="ttc-label" id="ttc-label">TTC: &gt; 3.0 வினாடி</span>
+          <div class="ttc-bar-bg">
+            <div class="ttc-bar-fill" id="ttc-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spoken Explanation & Voice Box -->
+      <div class="panel-card" style="margin-top: 16px;">
+        <h2 class="panel-title">
+          <span>🔊</span> ஒலி அறிவிப்பு & விளக்கம் ("ஏன்?")
+        </h2>
+        <div class="narration-box" id="narration-box" role="region" aria-live="polite">
+          <p class="narration-tamil" id="narration-ta">பாதை முற்றிலும் பாதுகாப்பாக உள்ளது.</p>
+          <p class="narration-english" id="narration-en">Path is clear ahead.</p>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-action btn-why" id="btn-why" aria-label="ஏன்? கடைசி எச்சரிக்கை காரணத்தை விளக்கு (Key W)">
+            <span>"ஏன்?" (Why?)</span>
+            <small style="font-size: 13px; font-weight: normal;">காரணத்தை விளக்கு (Key W)</small>
+          </button>
+          <button class="btn-action btn-radar" id="btn-radar" aria-label="சுற்றிப் பார் - இடது-வலது ரேடார் ஸ்கேன் (Key R)">
+            <span>"சுற்றிப் பார்"</span>
+            <small style="font-size: 13px; font-weight: normal;">3D ரேடார் ஸ்கேன் (Key R)</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Practice Simulator (பயிற்சி முறை) -->
+    <aside class="control-sidebar" aria-label="பயிற்சி சிமுலேட்டர் கட்டுப்பாடுகள்">
+      <div class="panel-card">
+        <h2 class="panel-title">
+          <span>🎯</span> பயிற்சி சிமுலேட்டர் (Practice)
+        </h2>
+        <p style="font-size: 15px; color: var(--text-subtle); margin-bottom: 14px;">
+          வெளியே நடப்பதற்கு முன் வெவ்வேறு சாலை ஆபத்துகளின் ஒலி மற்றும் அதிர்வுகளை இங்கு பாதுகாப்பாகப் பழகிக் கொள்ளலாம்:
+        </p>
+
+        <div class="scenario-grid">
+          <button class="btn-hazard" id="scen-auto" aria-label="ஆட்டோ அணுகுமுறை பயிற்சி. விரைந்து வரும் ஆட்டோ">
+            <span>🛺 ஆட்டோ / E-Rickshaw</span>
+            <span style="color: var(--primary-turmeric); font-size: 14px;">[Key 1]</span>
+          </button>
+
+          <button class="btn-hazard" id="scen-scaffold" aria-label="தலைக்கு மேல் மரம் அல்லது சாரக்கட்டு பயிற்சி">
+            <span>🌳 தலைக்கு மேல் மரம் (Sky Guard)</span>
+            <span style="color: var(--primary-turmeric); font-size: 14px;">[Key 2]</span>
+          </button>
+
+          <button class="btn-hazard" id="scen-pit" aria-label="திறந்த குழி அல்லது படிகள் இறங்குதல் பயிற்சி">
+            <span>🕳️ திறந்த குழி / Drop-off</span>
+            <span style="color: var(--primary-turmeric); font-size: 14px;">[Key 3]</span>
+          </button>
+
+          <button class="btn-hazard" id="scen-cattle" aria-label="சாலையில் மாடு அல்லது கால்நடை பயிற்சி">
+            <span>🐂 சாலையில் மாடு (Cattle)</span>
+            <span style="color: var(--primary-turmeric); font-size: 14px;">[Key 4]</span>
+          </button>
+
+          <button class="btn-hazard" id="scen-person" aria-label="முன்னால் நடக்கும் மனிதர் பயிற்சி">
+            <span>🚶 முன்னால் நபர் (Pedestrian)</span>
+            <span style="color: var(--primary-turmeric); font-size: 14px;">[Key 5]</span>
+          </button>
+
+          <button class="btn-hazard" id="scen-clear" aria-label="பாதை தெளிவு. ஆபத்து நீங்கிய நிலை">
+            <span>🟢 பாதை தெளிவு (Clear Corridor)</span>
+            <span style="color: #10B981; font-size: 14px;">[Key 0]</span>
+          </button>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <button id="btn-audio-toggle" class="btn-hazard" style="flex: 1; text-align: center; justify-content: center;">
+            🔊 ஒலி இயக்கு (Unmute)
+          </button>
+        </div>
+      </div>
+
+      <!-- Safety Notice Card -->
+      <div class="safety-notice" role="note">
+        <strong>⚠️ முதன்மை பாதுகாப்பு அறிவிப்பு:</strong><br />
+        வழித்துணை ஒரு <em>துணை உபகரணம் மட்டுமே</em>. கண்பார்வையற்றோருக்கான வெள்ளைக் கோல் (White Cane) அல்லது வழிகாட்டி நாய்க்கு மாற்றல்ல. எப்போதும் வெள்ளைக் கோலை கையில் வைத்துக்கொண்டே நடக்கவும்.
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
+

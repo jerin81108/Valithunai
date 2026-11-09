@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@vazhithunai/safety-engine": ["../safety-engine/dist/src/index.d.ts"]
+    }
+  },
+  "include": ["src/**/*"]
+}

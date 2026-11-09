@@ -1,0 +1,16 @@
+{
+  "name": "@vazhithunai/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@vazhithunai/safety-engine": "workspace:*",
+    "@vazhithunai/audio-engine": "workspace:*",
+    "@vazhithunai/haptics": "workspace:*",
+    "@vazhithunai/ui-tokens": "workspace:*"
+  }
+}
+

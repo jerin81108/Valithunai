@@ -114,3 +114,4 @@ export function generateExplanation(
     en: `${enClass} detected ${dist} meters ${dir.en}.`
   };
 }
+
